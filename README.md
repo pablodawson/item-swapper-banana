@@ -3,6 +3,8 @@
 
 This repo gives a basic framework for serving Stable Diffusion 1.5 in production using simple HTTP servers.
 
+*THIS MODEL HAS THE SAFETY CHECKER DISABLED*
+
 # Quickstart
 
 Deploy this model via the one-click template [here]((https://app.banana.dev/templates/djt/stable-diffusion-1.5).
