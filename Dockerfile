@@ -1,18 +1,24 @@
 FROM pytorch/pytorch:1.11.0-cuda11.3-cudnn8-runtime
+ENV	 DEBIAN_FRONTEND=noninteractive
 
 WORKDIR /
 
+ARG AWS_ACCESS_KEY_ID
+ARG AWS_SECRET_ACCESS_KEY
+
 RUN apt-get update && apt-get install -y git
+RUN git clone https://github.com/kohya-ss/sd-scripts.git
+RUN mv sd-scripts/ sdscripts/
 
 RUN pip3 install --upgrade pip
+
+RUN apt-get install python3-opencv -y
 
 ADD requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 
 ADD server.py .
 EXPOSE 8000
-
-ARG HF_AUTH_TOKEN
 
 ADD download.py .
 RUN python3 download.py
