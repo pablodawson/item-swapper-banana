@@ -4,11 +4,6 @@ from diffusers import DiffusionPipeline, DPMSolverMultistepScheduler
 import boto3
 
 def download_model():
-    # Seg
-    models = ["shi-labs/oneformer_ade20k_swin_tiny", "shi-labs/oneformer_ade20k_dinat_large"]
-    processor = OneFormerProcessor.from_pretrained(models[0])
-    model = OneFormerForUniversalSegmentation.from_pretrained(models[0])
-
     # Stable diffusion
     pipeline = StableDiffusionInpaintPipeline.from_pretrained(
     "runwayml/stable-diffusion-inpainting",
