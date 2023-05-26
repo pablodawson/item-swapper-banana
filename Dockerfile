@@ -6,6 +6,9 @@ WORKDIR /
 ARG AWS_ACCESS_KEY_ID
 ARG AWS_SECRET_ACCESS_KEY
 
+ENV AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+ENV AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+
 RUN apt-get update && apt-get install -y git
 RUN git clone https://github.com/kohya-ss/sd-scripts.git
 RUN mv sd-scripts/ sdscripts/
