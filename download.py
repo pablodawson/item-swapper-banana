@@ -30,5 +30,5 @@ def download_lora_models():
             bucket.download_file(obj.key, obj.key)
 
 if __name__ == "__main__":
-    #download_model()
+    download_model()
     download_lora_models()
