@@ -4,3 +4,6 @@ diffusers[torch]==0.14.0
 xformers
 boto3
 opencv-python
+transformers
+safetensors
+Pillow

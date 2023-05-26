@@ -44,7 +44,7 @@ def inference(model_inputs:dict):
     image_bytes = base64.b64decode(image_b64.encode('utf-8'))
     seg_bytes = base64.b64decode(seg_b64.encode('utf-8'))
 
-    image = Image.open(BytesIO(img_bytes))
+    image = Image.open(BytesIO(image_bytes))
     seg = Image.open(BytesIO(seg_bytes))
 
     if (image.format=="PNG"):

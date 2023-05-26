@@ -1,6 +1,6 @@
 import os
 import torch
-from diffusers import DiffusionPipeline, DPMSolverMultistepScheduler
+from diffusers import StableDiffusionInpaintPipeline
 import boto3
 
 def download_model():
