@@ -23,6 +23,7 @@ def download_lora_models():
     for obj in bucket.objects.filter(Prefix = target):
         if not obj.key.endswith("/"):
             bucket.download_file(obj.key, obj.key)
+            print(f"Downloaded {obj.key}")
 
 if __name__ == "__main__":
     download_model()
