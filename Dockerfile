@@ -21,6 +21,7 @@ ADD requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 
 ADD server.py .
+ADD utils.py .
 EXPOSE 8000
 
 ADD download.py .
