@@ -1,5 +1,5 @@
-FROM pytorch/pytorch:1.11.0-cuda11.3-cudnn8-runtime
-ENV	 DEBIAN_FRONTEND=noninteractive
+FROM pytorch/pytorch:1.13.1-cuda11.6-cudnn8-runtime
+ENV DEBIAN_FRONTEND=noninteractive
 
 WORKDIR /
 
