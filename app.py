@@ -1,7 +1,7 @@
 from PIL import Image
 import torch
 import numpy as np
-from diffusers import StableDiffusionInpaintPipeline, UniPCMultistepScheduler
+from diffusers import StableDiffusionInpaintPipeline
 from utils import apply_lora, create_mask
 import time
 import cv2
@@ -12,16 +12,13 @@ def init():
     global model
     global pipeline
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
     # Stable diffusion
     pipeline = StableDiffusionInpaintPipeline.from_pretrained(
     "runwayml/stable-diffusion-inpainting",
     torch_dtype=torch.float16,
-    ).to(device)
-    pipeline.scheduler = UniPCMultistepScheduler.from_config(pipeline.scheduler.config)
-    pipeline.enable_xformers_memory_efficient_attention()
-    pipeline.enable_model_cpu_offload()
+    ).to("cuda")
+    #pipeline.enable_xformers_memory_efficient_attention()
+    #pipeline.enable_model_cpu_offload()
 
 def inference(model_inputs:dict):
     global model
@@ -71,9 +68,10 @@ def inference(model_inputs:dict):
 
         timestart = time.time()
 
-        image = pipeline(prompt, 
-                    image, num_inference_steps=inference_steps, guidance_scale=guidance_scale, mask_image=mask, 
-                    width=width, height=height).images[0]
+        with autocast("cuda"):
+            image = pipeline(prompt, 
+                        image, num_inference_steps=inference_steps, guidance_scale=guidance_scale, mask_image=mask, 
+                        width=width, height=height).images[0]
 
         print("Time to add item: ", time.time() - timestart)
     
