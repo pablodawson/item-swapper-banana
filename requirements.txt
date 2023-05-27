@@ -1,5 +1,4 @@
 sanic==22.6.2
-torch
 diffusers[torch]==0.14.0
 xformers
 boto3
