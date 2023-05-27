@@ -9,6 +9,8 @@ def download_model():
     "runwayml/stable-diffusion-inpainting",
     torch_dtype=torch.float16,
     )
+    pipeline.scheduler = DPMSolverMultistepScheduler.from_pretrained("runwayml/stable-diffusion-inpainting", subfolder="scheduler")
+
 
 def download_lora_models():
     print("Downloading LORA models...")

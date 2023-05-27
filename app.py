@@ -2,7 +2,7 @@ from PIL import Image
 import torch
 from torch import autocast
 import numpy as np
-from diffusers import StableDiffusionInpaintPipeline
+from diffusers import StableDiffusionInpaintPipeline, DPMSolverMultistepScheduler
 from utils import apply_lora, create_mask
 import time
 import cv2
@@ -18,8 +18,7 @@ def init():
     "runwayml/stable-diffusion-inpainting",
     torch_dtype=torch.float16,
     ).to("cuda")
-    #pipeline.enable_xformers_memory_efficient_attention()
-    #pipeline.enable_model_cpu_offload()
+    pipeline.scheduler = DPMSolverMultistepScheduler.from_pretrained("runwayml/stable-diffusion-inpainting", subfolder="scheduler")
 
 def inference(model_inputs:dict):
     global model
