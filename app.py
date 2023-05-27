@@ -8,16 +8,17 @@ import cv2
 import base64
 from io import BytesIO
 
-
 def init():
     global model
     global pipeline
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     # Stable diffusion
     pipeline = StableDiffusionInpaintPipeline.from_pretrained(
     "runwayml/stable-diffusion-inpainting",
     torch_dtype=torch.float16,
-    )
+    ).to(device)
     pipeline.scheduler = UniPCMultistepScheduler.from_config(pipeline.scheduler.config)
     pipeline.enable_xformers_memory_efficient_attention()
     pipeline.enable_model_cpu_offload()
