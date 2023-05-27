@@ -1,5 +1,6 @@
 from PIL import Image
 import torch
+from torch import autocast
 import numpy as np
 from diffusers import StableDiffusionInpaintPipeline
 from utils import apply_lora, create_mask
